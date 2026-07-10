@@ -13,8 +13,11 @@ const path = require('path');
 try {
   const dotenv = require('dotenv')
   const tryPaths = [
+    path.join(__dirname, '.env.local'),
     path.join(__dirname, '.env'),
+    path.join(__dirname, '..', '.env.local'),
     path.join(__dirname, '..', '.env'),
+    path.join(__dirname, '..', '..', '.env.local'),
     path.join(__dirname, '..', '..', '.env'),
   ]
 
@@ -23,7 +26,7 @@ try {
     try {
       const res = dotenv.config({ path: p })
       if (res.parsed) {
-        console.log(`Loaded .env from ${p}`)
+        console.log(`Loaded environment from ${p}`)
         loaded = true
         break
       }
