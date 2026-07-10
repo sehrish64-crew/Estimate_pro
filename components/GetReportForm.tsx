@@ -17,7 +17,7 @@ interface GetReportFormProps {
   prefilledIdentValue?: string
 }
 
-const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'Campervan' , 'Caravan' , 'Motorhomw' , 'RV' , 'Fifth Wheel', 'Trailer', 'Toy Hauler']
+const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'Campervan' , 'Caravan' , 'Motorhome' , 'RV' , 'Fifth Wheel', 'Trailer', 'Toy Hauler']
 const packageRedirectUrls: Record<string, string> = {
   basic: 'https://digitalpdfgoods.etsy.com/listing/4535044640/digital-pdf-tech',
   standard: 'https://digitalpdfgoods.etsy.com/listing/4535022331/digital-pdf-tech',

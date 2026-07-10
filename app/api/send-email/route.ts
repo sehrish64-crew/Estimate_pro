@@ -100,7 +100,9 @@ export async function sendEmail(to: string, subject: string, htmlContent: string
     const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined
     const SMTP_USER = process.env.SMTP_USER
     const SMTP_PASS = process.env.SMTP_PASS
-    const SMTP_SECURE = (process.env.SMTP_SECURE || 'false').toLowerCase() === 'true'
+    const SMTP_SECURE = process.env.SMTP_SECURE
+      ? process.env.SMTP_SECURE.toLowerCase() === 'true'
+      : SMTP_PORT === 465
 
     const fromAddress = process.env.EMAIL_FROM || (SMTP_USER ? SMTP_USER : 'Vehicle Reports <Vehicle Health Estimate@gmail.com>')
 
@@ -117,6 +119,14 @@ export async function sendEmail(to: string, subject: string, htmlContent: string
         if (SMTP_USER && SMTP_PASS) {
           transportOptions.auth = { user: SMTP_USER, pass: SMTP_PASS }
         }
+
+        console.log('SMTP transport options:', {
+          host: transportOptions.host,
+          port: transportOptions.port,
+          secure: transportOptions.secure,
+          authConfigured: Boolean(transportOptions.auth),
+          fromAddress,
+        })
 
         const transporter = nodemailer.createTransport(transportOptions)
 
