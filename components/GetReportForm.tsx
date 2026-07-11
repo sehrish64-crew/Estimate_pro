@@ -33,15 +33,29 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
   const [customerName, setCustomerName] = useState('')
   const [customerPhone, setCustomerPhone] = useState('')
   const [customerEmail, setCustomerEmail] = useState('')
-  const [selectedPackage, setSelectedPackage] = useState(preselectedPackage || '')
+  const [selectedPackage, setSelectedPackage] = useState(preselectedPackage || 'basic')
   const [selectedCountryCode, setSelectedCountryCode] = useState(selectedCountry?.code || 'US')
   const [countryFilter, setCountryFilter] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Pre-fill package
-  useEffect(() => { if (preselectedPackage) setSelectedPackage(preselectedPackage) }, [preselectedPackage])
-  useEffect(() => { if (prefilledIdentType && prefilledIdentValue) { setVehicleIdType(prefilledIdentType); prefilledIdentType === 'vin' ? setVinNumber(prefilledIdentValue.toUpperCase()) : setPlateNumber(prefilledIdentValue.toUpperCase()) } }, [prefilledIdentType, prefilledIdentValue])
+  useEffect(() => {
+    if (preselectedPackage) {
+      setSelectedPackage(preselectedPackage)
+    } else {
+      setSelectedPackage('basic')
+    }
+  }, [preselectedPackage])
+
+  useEffect(() => {
+    if (prefilledIdentType && prefilledIdentValue) {
+      setVehicleIdType(prefilledIdentType)
+      prefilledIdentType === 'vin'
+        ? setVinNumber(prefilledIdentValue.toUpperCase())
+        : setPlateNumber(prefilledIdentValue.toUpperCase())
+    }
+  }, [prefilledIdentType, prefilledIdentValue])
   useEffect(() => { if (selectedCountry && selectedCountry.code !== selectedCountryCode) setSelectedCountryCode(selectedCountry.code) }, [selectedCountry])
 
   const validateForm = () => {
@@ -176,9 +190,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                     <HelpCircle className="w-5 h-5" />
                   </button>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">
-                  Enter your 17-character Vehicle Identification Number
-                </p>
+              
               </div>
             ) : (
               <div>
@@ -287,7 +299,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
               <Button
                 type="submit"
                 className="flex-1 h-12 bg-green-600 hover:bg-green-700 text-white"
-                disabled={isSubmitting || !selectedPackage}
+                disabled={isSubmitting}
               >
                 {isSubmitting
                   ? 'Processing...'

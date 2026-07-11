@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { Key, Hash, Loader, ShieldCheck, AlertTriangle, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -10,16 +10,19 @@ import { useTranslations } from '@/lib/translations'
 
 export default function Banner() {
   const [vin, setVin] = useState('')
-  const [vehicleIdType, setVehicleIdType] = useState<'vin' | 'plate' | null>(null)
+  const [vehicleIdType, setVehicleIdType] = useState<'vin' | 'plate'>('vin')
   const [plateNumber, setPlateNumber] = useState('')
   const [isFormOpen, setIsFormOpen] = useState(false)
   const { t } = useTranslations()
 
-  useEffect(() => {
-    setVehicleIdType('vin')
-  }, [])
+  const isVinValid = vin.trim().length > 0
+  const isPlateValid = plateNumber.trim().length > 0
+  const canSubmit = vehicleIdType === 'plate' ? isPlateValid : isVinValid
 
-  const handleSubmit = () => setIsFormOpen(true)
+  const handleSubmit = () => {
+    if (!canSubmit) return
+    setIsFormOpen(true)
+  }
 
   return (
     <section className="relative py-16 md:py-24 bg-black text-white overflow-hidden">
@@ -178,7 +181,9 @@ export default function Banner() {
 
               {/* BUTTON */}
               <Button
+                type="button"
                 onClick={handleSubmit}
+                disabled={!canSubmit}
                 className="w-full mt-3 h-11 bg-green-500 hover:bg-green-400 text-black font-bold"
               >
                 Get Report
