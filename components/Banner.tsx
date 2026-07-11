@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Key, Hash, Loader, ShieldCheck, AlertTriangle, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -141,7 +142,7 @@ export default function Banner() {
             <div className="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-xl">
 
               {/* TABS */}
-              <div className="flex justify-center md:justify-start gap-2 mb-3">
+              {/* <div className="flex justify-center md:justify-start gap-2 mb-3">
 
                 <button
                   onClick={() => setVehicleIdType('vin')}
@@ -167,7 +168,6 @@ export default function Banner() {
 
               </div>
 
-              {/* INPUT */}
               <Input
                 placeholder={vehicleIdType === 'vin' ? "Enter VIN" : "Enter Plate"}
                 value={vehicleIdType === 'vin' ? vin : plateNumber}
@@ -177,16 +177,17 @@ export default function Banner() {
                     : setPlateNumber(e.target.value.toUpperCase())
                 }
                 className="h-11 bg-white/5 border border-white/20 text-white"
-              />
+              /> */}
 
               {/* BUTTON */}
               <Button
+                asChild
                 type="button"
-                onClick={handleSubmit}
-                disabled={!canSubmit}
                 className="w-full mt-3 h-11 bg-green-500 hover:bg-green-400 text-black font-bold"
               >
-                Get Report
+                <Link href="/pricing" className="w-full h-full flex items-center justify-center">
+                  Get Report
+                </Link>
               </Button>
 
             </div>
