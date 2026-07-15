@@ -19,9 +19,9 @@ interface GetReportFormProps {
 
 const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'Campervan' , 'Caravan' , 'Motorhome' , 'RV' , 'Fifth Wheel', 'Trailer', 'Toy Hauler']
 const packageRedirectUrls: Record<string, string> = {
-  basic: 'https://digitalpdfgoods.etsy.com/listing/4535044640/digital-pdf-tech',
-  standard: 'https://digitalpdfgoods.etsy.com/listing/4535022331/digital-pdf-tech',
-  premium: 'https://digitalpdfgoods.etsy.com/listing/4535019180/digital-pdf-tech',
+  basic: 'https://buy.stripe.com/3cI00k0zCcGr1jh8hOfjG03',
+  standard: 'https://buy.stripe.com/14AaEY3LO49VaTRdC8fjG04',
+  premium: 'https://buy.stripe.com/28E14o0zC5dZ5zxcy4fjG06',
 }
 
 export default function GetReportForm({ isOpen, onClose, preselectedPackage, prefilledIdentType, prefilledIdentValue }: GetReportFormProps) {
@@ -93,8 +93,49 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
       }
 
       const res = await fetch('/api/orders/create', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
-      const data = await res.json()
-      if (!res.ok || !data.orderId) throw new Error(data.error || 'Order creation failed')
+
+      let data: any = null
+      let rawText = ''
+
+      try {
+        rawText = await res.text()
+        if (rawText) {  
+          try {
+            data = JSON.parse(rawText)
+          } catch {
+            data = rawText
+          }
+        }
+      } catch (readError) {
+        console.error('❌ Failed to read order creation response body:', readError)
+        throw new Error('Failed to create order (invalid response from server)')
+      }
+
+      if (!res.ok) {
+        const serverMessage =
+          typeof data === 'object' && data
+            ? (data.error || data.message || res.statusText)
+            : typeof data === 'string'
+              ? data
+              : res.statusText || `Order creation failed (${res.status})`
+
+        console.error('❌ Order creation failed:', {
+          status: res.status,
+          statusText: res.statusText,
+          body: data,
+          rawText,
+        })
+
+        throw new Error(serverMessage || 'Failed to submit order. Please try again.')
+      }
+
+      if (!data || typeof data !== 'object' || !data.orderId) {
+        throw new Error(
+          typeof data === 'string' && data.trim()
+            ? data
+            : 'Order creation failed'
+        )
+      }
 
       console.log('Order created:', { orderId: data.orderId, orderNumber: data.orderNumber })
       const redirectUrl = packageRedirectUrls[selectedPackage]

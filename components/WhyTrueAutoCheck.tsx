@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react'
 import GetReportForm from './GetReportForm'
 import { useTranslations } from '@/lib/translations'
 SwiperCore.use([Navigation, Autoplay]);
-export default function WhyVehicle Health Estimate() {
+export default function WhyTrueAutoCheck() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslations()

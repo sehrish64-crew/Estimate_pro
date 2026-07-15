@@ -2,7 +2,7 @@ import { ShieldAlert, CheckCircle, TrendingDown } from 'lucide-react'
 import Image from 'next/image'
 import { getTranslationsForLang } from '@/lib/translations'
 
-export default async function WhyVehicle Health Estimate() {
+export default async function WhyCarVertical() {
   // Resolve language robustly (handle different shapes of next/headers in various runtimes)
   let lang = 'en'
   try {
