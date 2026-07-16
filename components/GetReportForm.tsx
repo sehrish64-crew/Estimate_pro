@@ -17,11 +17,9 @@ interface GetReportFormProps {
   prefilledIdentValue?: string
 }
 
-const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'Campervan' , 'Caravan' , 'Motorhome' , 'RV' , 'Fifth Wheel', 'Trailer', 'Toy Hauler']
+const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'Campervan', 'Caravan', 'Motorhome', 'RV', 'Fifth Wheel', 'Trailer', 'Toy Hauler']
 const packageRedirectUrls: Record<string, string> = {
-  basic: 'https://buy.stripe.com/3cI00k0zCcGr1jh8hOfjG03',
-  standard: 'https://buy.stripe.com/14AaEY3LO49VaTRdC8fjG04',
-  premium: 'https://buy.stripe.com/28E14o0zC5dZ5zxcy4fjG06',
+  basic: 'https://pdf-tech-2.myshopify.com/products/digital-pdf',
 }
 
 export default function GetReportForm({ isOpen, onClose, preselectedPackage, prefilledIdentType, prefilledIdentValue }: GetReportFormProps) {
@@ -99,7 +97,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
 
       try {
         rawText = await res.text()
-        if (rawText) {  
+        if (rawText) {
           try {
             data = JSON.parse(rawText)
           } catch {
@@ -183,11 +181,10 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                   <button
                     type="button"
                     onClick={() => setVehicleIdType('vin')}
-                    className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${
-                      vehicleIdType === 'vin'
+                    className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${vehicleIdType === 'vin'
                         ? 'bg-green-600 text-white shadow'
                         : 'text-gray-300 hover:bg-gray-700/80'
-                    }`}
+                      }`}
                   >
                     <Key className="w-4 h-4" />
                     <span className="text-sm font-medium">By VIN</span>
@@ -195,11 +192,10 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                   <button
                     type="button"
                     onClick={() => setVehicleIdType('plate')}
-                    className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${
-                      vehicleIdType === 'plate'
+                    className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${vehicleIdType === 'plate'
                         ? 'bg-green-600 text-white shadow'
                         : 'text-gray-300 hover:bg-gray-700/80'
-                    }`}
+                      }`}
                   >
                     <Hash className="w-4 h-4" />
                     <span className="text-sm font-medium">By Plate</span>
@@ -231,7 +227,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                     <HelpCircle className="w-5 h-5" />
                   </button>
                 </div>
-              
+
               </div>
             ) : (
               <div>
@@ -320,7 +316,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
               />
             </div>
 
-          
+
             {error && (
               <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg">
                 <p className="text-sm text-red-400">{error}</p>
@@ -344,14 +340,13 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
               >
                 {isSubmitting
                   ? 'Processing...'
-                  : `Submit Order - ${
-                      selectedPackage
-                        ? formatCurrency(
-                            getPrice(selectedPackage as any, 'USD'),
-                            'USD'
-                          )
-                        : '$0'
-                    }`}
+                  : `Submit Order - ${selectedPackage
+                    ? formatCurrency(
+                      getPrice(selectedPackage as any, 'USD'),
+                      'USD'
+                    )
+                    : '$0'
+                  }`}
               </Button>
             </div>
           </form>

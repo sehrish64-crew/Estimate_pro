@@ -1,5 +1,5 @@
 export const PRICING_MAP: Record<string, { basic: number; standard: number; premium: number }> = {
-  'USD': { basic: 45, standard: 55, premium: 65 },
+  'USD': { basic: 40, standard: 55, premium: 65 },
   'EUR': { basic: 27.99, standard: 46.99, premium: 65.99 },
   'GBP': { basic: 24.99, standard: 41.99, premium: 58.99 },
   'AUD': { basic: 44.99, standard: 74.99, premium: 104.99 },

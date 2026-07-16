@@ -12,38 +12,14 @@ const PRIMARY = "#22c55e" // neon green
 
 const basePricingPlans = [
   {
-    name: 'Premium',
-    badge: 'GOLD',
-    badgeColor: 'bg-gradient-to-r from-green-400 to-cyan-400 text-black',
-    priceKey: 'premium' as const,
-    icon: Crown,
-    popular: false,
-    borderColor: 'border-white/10',
-    iconBg: 'bg-white/10',
-    iconColor: 'text-green-400',
-    features: [
-      'All Premium Features',
-      'Accident Records',
-      'Theft Records',
-      'Salvage Records',
-      'Open Recalls',
-      'Odometer Readings',
-      'Loan Details',
-      'Market Value',
-      'Specifications',
-    ],
-    buttonText: 'Buy Now',
-    href: 'https://digitalpdfgoods.etsy.com/listing/4535019180/digital-pdf-tech',
-  },
-  {
-    name: 'Basic',
-    badge: 'MOST POPULAR',
+    name: 'Essential Plan',
+    badge: 'BEST VALUE',
     badgeColor: 'bg-gradient-to-r from-green-400 to-cyan-400 text-black',
     priceKey: 'basic' as const,
     icon: Zap,
     popular: true,
-    borderColor: 'border-white/10',
-    iconBg: 'bg-white/10',
+    borderColor: 'border-green-400/40',
+    iconBg: 'bg-green-400/15',
     iconColor: 'text-green-400',
     features: [
       'Accident Records',
@@ -54,28 +30,6 @@ const basePricingPlans = [
     ],
     buttonText: 'Buy Now',
     href: 'https://digitalpdfgoods.etsy.com/listing/4535044640/digital-pdf-tech',
-  },
-  {
-    name: 'Standard',
-    badge: 'DIAMOND',
-    badgeColor: 'bg-gradient-to-r from-green-400 to-cyan-400 text-black',
-    priceKey: 'standard' as const,
-    icon: Sparkles,
-    popular: false,
-    borderColor: 'border-white/10',
-    iconBg: 'bg-white/10',
-    iconColor: 'text-green-400',
-    features: [
-      'Accident Records',
-      'Theft Records',
-      'Salvage Records',
-      'Open Recalls',
-      'Odometer Readings',
-      'Loan Details',
-      'Market Value',
-    ],
-    buttonText: 'Buy Now',
-    href: 'https://digitalpdfgoods.etsy.com/listing/4535022331/digital-pdf-tech',
   },
 ]
 
@@ -152,14 +106,14 @@ export default function PricingClient() {
             </h1>
 
             <p className="mt-4 text-gray-400 text-lg">
-              Get instant reports with trusted data sources.
+              One essential report plan with trusted data sources.
             </p>
 
 
           </div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
 
             {pricingPlans.map((plan, i) => (
               <div
